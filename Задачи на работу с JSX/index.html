@@ -14,7 +14,311 @@
     <div id="content"></div>
 
     <script type="text/babel">
+        // // На рендеринг
+        // // 1. Сделайте так, чтобы метод render вывел на экран следующее:
+        // // <div>
+        // // текст
+        // // </div>
+
+        // class Test extends React.Component{
+        //     render(){
+        //         return (
+        //             <div>
+        //                 текст
+        //             </div>
+        //         );
+        //     };
+        // }
+
+        // ReactDOM.render(<Test />, document.getElementById('content'));
+
+
+
+
+        // // 2. Пусть в методе render есть переменная text с текстом 'текст'. С ее помощью выведите следующее:
+        // // <div>
+        // //     текст
+        // // </div>
+
+        // class Test extends React.Component{
+        //     render(){
+        //         const text  = 'Текст';
+        //         return (
+        //             <div>{text}</div>
+        //         );
+        //     };
+        // };
         
+        // ReactDOM.render(<Test />, document.getElementById('content'));
+
+
+
+
+        // // 3. Пусть в методе render есть переменная text с текстом '<p>текст</p>'. С ее помощью выведите следующее:
+        // // <div>
+        // //     <p>текст</p>
+        // // </div>
+
+        // class Test extends React.Component{
+        //     render(){
+        //         const text  = <p>текст 1</p>;
+        //         return (
+        //             <div>{text}</div>
+        //         );
+        //     };
+        // };
+        
+        // ReactDOM.render(<Test />, document.getElementById('content'));
+
+
+
+
+        // // 4. Пусть в методе render есть переменная text1 с текстом '<p>текст1</p>' и переменная text2 с текстом '<p>текст2</p>'. С их помощью выведите следующее:
+        // // <div>
+        // //     <p>текст1</p>
+        // //     <p>!!!</p>
+        // //     <p>текст2</p>
+        // // </div>
+
+        // class App extends React.Component{
+        //     render(){
+        //         const text  = <div><p>Текст1</p><p>!!!</p><p>Текст2</p></div>;
+        //         return (
+        //             <div>{text}</div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На атрибуты
+        // // 5. Пусть в методе render есть переменная attr с текстом 'block'. Сделайте так, чтобы метод render вывел на экран следующее (значение атрибута id должно вставится из переменной attr):
+        // // <div id="block">
+        // //     текст
+        // // </div>
+    
+        // class App extends React.Component{
+        //     render(){
+        //         const attr  = 'block';
+        //         return (
+        //             <div id={attr}>Текст</div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 6. Пусть в методе render есть переменная str с текстом 'block'. Сделайте так, чтобы метод render вывел на экран следующее (значение атрибута class должно вставится из переменной str):
+        // // <div class="block">
+        // //     текст
+        // // </div>
+
+        // class App extends React.Component{
+        //     render(){
+        //         const str  = 'block';
+        //         return (
+        //             <div className={str}>Текст</div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На работу с CSS
+        // // 7. Дан див с текстом. Установите этому диву зеленый цвет, границу и border-radius в 30px.
+
+        // class App extends React.Component{
+        //     render(){
+        //         return (
+        //             <div style={{color: 'green', borderRadius: '30px'}}>
+        //                 Текст
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На условия
+        // // 8. Пусть в методе render есть переменная show, которая может иметь значение true или false. Сделайте так, чтобы, если эта переменная равна true, метод render вывел на экран следующее:
+        // // <div>
+        // //     текст 1
+        // // </div>
+        // // А если эта переменная равна false, то следующее:
+
+        // // <div>
+        // //     текст 2
+        // // </div>
+
+        // class App extends React.Component{
+        //     render(){
+        //         const show  = false;
+        //         let text;
+
+        //         if(show){
+        //             text = <div>Текст 1</div>;
+        //         }else{
+        //             text = <div>Текст 2</div>;
+        //         }
+        //         return (
+        //             <div>
+        //                 {text}
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На циклы
+        // // 9. Пусть в методе render есть переменная arr, в которой лежит массив с элементами ['a', 'b', 'c', 'd', 'e']. 
+        // // Сделайте так, чтобы метод render вывел на экран следующее (в каждую лишку запишется один из элементов массива):
+        // // <ul>
+        // //     <li>a</li>
+        // //     <li>b</li>
+        // //     <li>c</li>
+        // //     <li>d</li>
+        // //     <li>e</li>
+        // // </ul>
+
+        // class App extends React.Component{
+        //     render(){
+        //         const arr   = ['a', 'b', 'c', 'd', 'e'];
+        //         const list  = arr.map(function(item, index){
+        //             return <li key={index}>{item}</li>
+        //         });
+
+        //         return (
+        //             <ul>
+        //                 {list}
+        //             </ul>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На методы
+        // // 10. Пусть класс App имеет метод getText(), который своим результатом возвращает '<p>текст</p>'. Используя метод getText() в методе render выведите на экран следующее:
+        // // <div>
+        // //     <p>текст</p>
+        // // </div>
+
+        // class App extends React.Component{
+        //     getText(){
+        //         return <p>текст</p>;
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 {this.getText()}
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // 11. Пусть класс App имеет метод getNum1(), который своим результатом возвращает число 1 и метод getNum2(), который своим результатом возвращает число 2. 
+        // Используя эти методы в методе render выведите на экран сумму результатов этих методов (3 - результат сложения getNum1() и getNum2()):
+        // <div>
+        //     текст 3
+        // </div>
+
+        class App extends React.Component{
+            getNum1(){
+                return 1;
+            };
+
+            getNum2(){
+                return 2;
+            };
+
+            render(){
+                const text  = 'Текст';
+                return (
+                    <div>
+                        Текст {this.getNum1() + this.getNum2()}
+                    </div>
+                );
+            };
+        };
+
+        ReactDOM.render(<App />, document.getElementById('content'));
+    
+    
     </script>
 </body>
 </html>
