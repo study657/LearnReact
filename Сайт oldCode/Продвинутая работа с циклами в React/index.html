@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <title>Продвинутая работа с циклами в фреймворке React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // 1. Пусть в стейте дан массив имен ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']. Выведите каждый элемент этого массива в отдельной <li> в списке ul
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {names: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
+        //     };
+
+        //     render(){
+        //         const list  = this.state.names.map(function(name, index){
+        //             return <li key={index}>{name}</li>
+        //         });
+
+        //         return (
+        //             <ul>
+        //                 {list}
+        //             </ul>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 2. Переделайте предыдущую задачу так, чтобы под списком появилась кнопочка, по нажатию на которую в конец списка будет добавляться элемент с текстом 'пункт'
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {names: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
+        //     };
+
+        //     addName(){
+        //         this.state.names.push('пункт');
+        //         this.setState({names: this.state.names});
+        //     };
+
+        //     render(){
+        //         const list  = this.state.names.map(function(name, index){
+        //             return <li key={index}>{name}</li>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                 {list}
+        //                 </ul>
+        //                 <button onClick={this.addName.bind(this)}>Добавить</button>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 3. Переделайте предыдущую задачу так, чтобы появилась кнопочка, по нажатию на которую каждый раз будет исчезать последняя li из списка (каждый раз по одной, пока li в списке не закончатся)
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {names: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
+        //     };
+
+        //     deleteName(){
+        //         this.state.names.pop();
+        //         this.setState({names: this.state.names});
+        //     };
+
+        //     render(){
+        //         const list  = this.state.names.map(function(name, index){
+        //             return <li key={index}>{name}</li>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                 {list}
+        //                 </ul>
+        //                 <button onClick={this.deleteName.bind(this)}>Удалить</button>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // 4. Переделайте предыдущую задачу так, чтобы рядом с каждым именем появилась кнопочка, по нажатию на которую li с этим именем будет удаляться
+
+        class App extends React.Component{
+            constructor(){
+                super();
+                this.state  = {names: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
+            };
+
+            deleteName(index){
+                this.state.names.splice(index, 1);
+                this.setState({names: this.state.names});
+            };
+
+            render(){
+                const list  = this.state.names.map((name, index) => {
+                    return <li style={{color: 'red', fontSize: '30px'}} key={index}>
+                        {name}
+                        <button onClick={this.deleteName.bind(this, index)}>Удалить</button>
+                    </li>
+                });
+
+                return (
+                    <div>
+                        <ul>
+                            {list}
+                        </ul>
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App />, document.getElementById('content'));
+    </script>
+</body>
+</html>
