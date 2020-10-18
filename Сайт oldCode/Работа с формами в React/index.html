@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Работа с формами в React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // На инпуты
+        // // 1. Дан инпут и абзац. Сделайте так, чтобы при наборе текста в инпуте он автоматически появлялся в этом абзаце.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {value: ''};
+        //     };
+
+        //     handlerChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Текст нашего инпута: {this.state.value}</p>
+        //                 <input onChange={this.handlerChange.bind(this)} value={this.state.value} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 2. Модифицируйте предыдущую задачу так, чтобы текст в абзац выводился в верхнем регистре.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {value: ''};
+        //     };
+
+        //     handlerChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Текст нашего инпута: {this.state.value.toUpperCase()}</p>
+        //                 <input onChange={this.handlerChange.bind(this)} value={this.state.value} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 3. Дан инпут и абзац. В инпут вводится возраст пользователя. Сделайте так, чтобы при наборе текста в абзаце автоматически появлялся год рождения пользователя.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {value: ''};
+        //     };
+
+        //     handlerChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         let date    = new Date();
+        //         return (
+        //             <div>
+        //                 <p>Вы: {date.getFullYear() - this.state.value} года рождения</p>
+        //                 <input onChange={this.handlerChange.bind(this)} value={this.state.value} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 4. Дан инпут и 3 абзаца. В инпут вводится ФИО пользователя через пробел. 
+        // // Сделайте так, чтобы при наборе текста в первом абзаце появилась фамилия пользователя, во втором - имя, а в третьем - отчество.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state  = {value: ''};
+        //     };
+
+        //     handlerChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         let arr = this.state.value.split(' ');
+
+        //         return (
+        //             <div>
+        //                 <p>Ваша фамилия: {arr[0]}</p>
+        //                 <p>Ваше имя: {arr[1]}</p>
+        //                 <p>Ваше отчество: {arr[2]}</p>
+        //                 <input onChange={this.handlerChange.bind(this)} value={this.state.value} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На submit
+        // // 5. Дан инпут и кнопка submit. В инпут вводится текст. Сделайте так, чтобы по нажатию на кнопку этот текст вывелся в какой-нибудь абзац.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {value: '', text: ''};
+        //     };
+
+        //     handlerChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     showText(event){
+        //         this.setState({text: this.state.value});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>{this.state.text}</p>
+        //                 <form onSubmit={this.showText.bind(this)}>
+        //                     <input onChange={this.handlerChange.bind(this)} value={this.state.value} />
+        //                     <input type="submit" />
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 6. Даны два инпута и кнопка. В инпуты вводятся числа. Сделайте так, чтобы по нажатию на кнопку под инпутами в какой-нибудь абзац вывелась сумма этих чисел.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {valueFirst: '', valueSecond: '', sum: ''};
+        //     };
+
+        //     handlerChangeFirst(event){
+        //         this.setState({valueFirst: event.target.value});
+        //     };
+
+        //     handlerChangeSecond(event){
+        //         this.setState({valueSecond: event.target.value});
+        //     };
+
+        //     calculateNums(event){
+        //         let num1    = Number(this.state.valueFirst);
+        //         let num2    = Number(this.state.valueSecond);
+        //         this.setState({sum: num1 + num2});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <form onSubmit={this.calculateNums.bind(this)}>
+        //                     <input onChange={this.handlerChangeFirst.bind(this)} value={this.state.valueFirst} />
+        //                     <input onChange={this.handlerChangeSecond.bind(this)} value={this.state.valueSecond} />
+        //                     <input type="submit" />
+        //                 </form>
+        //                 <p>{this.state.sum}</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 7. Даны 3 инпута и кнопка. В инпуты вводится имя, фамилия и отчество. Сделайте так, чтобы по нажатию на кнопку под инпутами в какой-нибудь абзац вывелось полное ФИО пользователя.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {name: '', surname: '', otchestvo: '', fullName: ''};
+        //     };
+
+        //     changeName(event){
+        //         this.setState({name: event.target.value});
+        //     };
+
+        //     changeSurname(event){
+        //         this.setState({surname: event.target.value});
+        //     };
+
+        //     changeOtchestvo(event){
+        //         this.setState({otchestvo: event.target.value});
+        //     };
+
+        //     showNameUser(event){
+        //         this.setState({fullName: this.state.surname + ' ' + this.state.name + ' ' + this.state.otchestvo});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <form onSubmit={this.showNameUser.bind(this)}>
+        //                     <input onChange={this.changeName.bind(this)} value={this.state.name} placeholder="Введите Имя" />
+        //                     <input onChange={this.changeSurname.bind(this)} value={this.state.surname} placeholder="Введите Фамилию" />
+        //                     <input onChange={this.changeOtchestvo.bind(this)} value={this.state.otchestvo} placeholder="Введите Отчество" />
+        //                     <input type="submit" />
+        //                 </form>
+        //                 <p>{this.state.fullName}</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На формы + массивы
+        // // 8. Дан массив с именами пользователей. Выведите этот массив в виде списка ul. Также даны инпут и кнопка. 
+        // // Сделайте так, чтобы в инпут можно было ввести еще одно имя, нажать на кнопку - и это имя добавилось в конец списка ul
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {names: ['Коля', 'Гриша', 'Настя', 'Оксана', 'Анна'], value: ''};
+        //     };
+
+        //     changeInput(event){
+        //         this.setState({value: event.target.value})
+        //     };
+
+        //     changeList(event){
+        //         this.state.names.push(this.state.value);
+        //         this.setState({names: this.state.names});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         const list    = this.state.names.map((name, index) => {
+        //             return <li key={index}>{name}</li>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //                 <form onSubmit={this.changeList.bind(this)}>
+        //                     <input onChange={this.changeInput.bind(this)} type="text" placeholder="Введите новое Имя" />
+        //                     <input type="submit" />
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 9. Модифицируйте предыдущую задачу так, чтобы в конце каждой li появилась кнопка для удаления этого пункта списка.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {names: ['Коля', 'Гриша', 'Настя', 'Оксана', 'Анна'], value: ''};
+        //     };
+
+        //     changeInput(event){
+        //         this.setState({value: event.target.value})
+        //     };
+
+        //     changeList(event){
+        //         this.state.names.push(this.state.value);
+        //         this.setState({names: this.state.names});
+        //         event.preventDefault();
+        //     };
+
+        //     deleteName(index){
+        //         this.state.names.splice(index, 1);
+        //         this.setState({names: this.state.names});
+        //     };
+
+        //     render(){
+        //         const list    = this.state.names.map((name, index) => {
+        //             return <li key={index}>
+        //                         {name}
+        //                         <button onClick={this.deleteName.bind(this, index)}>Удалить</button>
+        //                     </li>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //                 <form onSubmit={this.changeList.bind(this)}>
+        //                     <input onChange={this.changeInput.bind(this)} type="text" placeholder="Введите новое Имя" />
+        //                     <input type="submit" />
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 10. Дан следующий стейт:
+        // // this.state = {
+        // //     hrefs: [
+        // //         {href: '1.html', text: 'ссылка 1'},
+        // //         {href: '2.html', text: 'ссылка 2'},
+        // //         {href: '3.html', text: 'ссылка 3'},
+        // //     ]
+        // // };
+        // // Выведите на экран следующее:
+        // // <ul>
+        // //     <li><a href="1.html">ссылка 1</a></li>
+        // //     <li><a href="2.html">ссылка 2</a></li>
+        // //     <li><a href="3.html">ссылка 3</a></li>
+        // // </ul>
+        // // Сделайте 2 инпута и кнопку, по нажатию на которую в список добавится новый li, причем href возьмется из первого инпута, а текст ссылки - из второго.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             hrefs: [
+        //                 {href: '1.html', text: 'ссылка 1'},
+        //                 {href: '2.html', text: 'ссылка 2'},
+        //                 {href: '3.html', text: 'ссылка 3'},
+        //             ], valueFirst: '', valueSecond: ''
+        //         };
+        //     };
+
+        //     editInputFirst(event){
+        //         this.setState({valueFirst: event.target.value});
+        //     };
+
+        //     editInputSecond(event){
+        //         this.setState({valueSecond: event.target.value});
+        //     };
+
+        //     addNewLinks(event){
+        //         this.state.hrefs.push({href: this.state.valueFirst, text: this.state.valueSecond});
+        //         this.setState({hrefs: this.state.hrefs});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         const list = this.state.hrefs.map((elem, index) => {
+        //             return <li key={index}>
+        //                 <a href={elem.href}>{elem.text}</a>
+        //             </li>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {list}
+        //                 <form onSubmit={this.addNewLinks.bind(this)}>
+        //                     <input value={this.state.valueFirst} onChange={this.editInputFirst.bind(this)} placeholder="Введите ссылку" />
+        //                     <input value={this.state.valueSecond} onChange={this.editInputSecond.bind(this)} placeholder="Введите текст" />
+        //                     <input type="submit"/>
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 11. Дан массив. Выведите этот массив в виде списка ul. 
+        // // Также даны инпут и кнопка. Сделайте так, чтобы в инпут можно было ввести число, нажать на кнопку - и из списка ul удалился элемент с введенным в инпут номером.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4', 'Элемент 5'], value: ''};
+        //     };
+
+        //     editInput(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     deleteElem(event){
+        //         let numElem = Number(this.state.value);
+        //         this.state.items.splice(numElem, 1);
+        //         this.setState({items: this.state.items});
+        //         event.preventDefault();
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <li key={index}>{item}</li>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {list}
+        //                 <form onSubmit={this.deleteElem.bind(this)}>
+        //                     <input value={this.state.value} onChange={this.editInput.bind(this)} />
+        //                     <input type="submit" />
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // 12. Дан следующий массив:
+        // this.state = {
+        //     users: [
+        //         {name: 'Коля', age: 30},
+        //         {name: 'Вася', age: 40},
+        //         {name: 'Петя', age: 50},
+        //     ]
+        // };
+        // Выведите его на экран в виде таблицы:
+        // <table>
+        //     <tr>
+        //         <td>Коля</td><td>30</td>
+        //     </tr>
+        //     <tr>
+        //         <td>Коля</td><td>40</td>
+        //     </tr>
+        //     <tr>
+        //         <td>Коля</td><td>50</td>
+        //     </tr>
+        // </table>
+        // Сделайте 2 инпута и кнопку, по нажатию на которую в список добавится новая tr с именем и возрастом.
+
+        class App extends React.Component{
+            constructor() {
+                super();
+                this.state = {
+                    users: [
+                        {name: 'Коля', age: 30},
+                        {name: 'Вася', age: 40},
+                        {name: 'Петя', age: 50},
+                    ], valueFirst: '', valueSecond: ''
+                };
+            };
+
+            editeFirstInput(event){
+                this.setState({valueFirst: event.target.value});
+            };
+
+            editeSecondInput(event){
+                this.setState({valueSecond: event.target.value});
+            };
+
+            addNewUser(event){
+                let nameUser    = this.state.valueFirst;
+                let ageUser     = this.state.valueSecond;
+
+                this.state.users.push({name: nameUser, age: ageUser});
+                this.setState({users: this.state.users});
+                event.preventDefault();
+            };
+
+            render(){
+                const list = this.state.users.map((user, index) => {
+                    return <tr key={index}>
+                            <td>{user.name}</td>
+                            <td>{user.age}</td>
+                        </tr>
+                });
+
+                return (
+                    <div>
+                        <table>
+                            {list}
+                        </table>
+                        <form onSubmit={this.addNewUser.bind(this)}>
+                            <input value={this.state.valueFirst} onChange={this.editeFirstInput.bind(this)} placeholder="Введите имя" />
+                            <input value={this.state.valueSecond} onChange={this.editeSecondInput.bind(this)} placeholder="Введите возраст" />
+                            <input type="submit" />
+                        </form>
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App />, document.getElementById('content'));
+    </script>
+</body>
+</html>
