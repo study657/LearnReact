@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <title>Продвинутая работа с формами в React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // На текстареа
+        // // 1. Дан текстареа и абзац. Сделайте так, чтобы при наборе текста в текстареа он автоматически появлялся в этом абзаце.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {value: ''};
+        //     };
+
+        //     textareaChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <textarea value={this.state.value} onChange={this.textareaChange.bind(this)} />
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // // На чекбоксы
+        // // 2. Дан чекбокс и абзац. Сделайте так, чтобы состояние чекбокса выводилось в этот абзац.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {checked: true};
+        //     };
+
+        //     chacboxChange(){
+        //         this.setState({checked: !this.state.checked});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Состояние чекбокса: {this.state.checked ? 'Выбран' : 'Не выбран'}</p>
+        //                 <input type="checkbox" checked={this.state.checked} onChange={this.chacboxChange.bind(this)} />
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 3. Дан чекбокс и какой-то абзац с текстом. Сделайте так, чтобы если чекбокс отмечен - абзац был виден на экране, а если не отмечен - не видим.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {checked: true};
+        //     };
+
+        //     chacboxChange(){
+        //         this.setState({checked: !this.state.checked});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>{this.state.checked ? 'Я какой-то параграф и я виден!' : ''}</p>
+        //                 <input type="checkbox" checked={this.state.checked} onChange={this.chacboxChange.bind(this)} />
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На селекты
+        // // 4. Дан селект со списком городов (просто селект в HTML коде, option не из массива). Дан также абзац, в который выводится выбранный город. 
+        // // Сделайте так, чтобы при смене города в селекте в абзаце он также менялся.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {city: 'Москва'};
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({city: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Ваш город: {this.state.city}</p>
+        //                 <select value={this.state.value} onChange={this.selectChange.bind(this)}>
+        //                     <option>Москва</option>
+        //                     <option>Воронеж</option>
+        //                     <option>Питер</option>
+        //                     <option>Самара</option>
+        //                     <option>Владимир</option>
+        //                 </select>
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+        // // 5. Модифицируйте предыдущую задачу так, чтобы список городов хранился в массиве из стейта.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {city: 'Москва', cities: [
+        //                 'Москва', 'Воронеж', 'Питер', 'Самара', 'Владимир'
+        //             ]
+        //         };
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({city: event.target.value});
+        //     };
+
+        //     render(){
+        //         const cities = this.state.cities.map((city, index) => {
+        //             return <option key={index}>{city}</option>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <p>Ваш город: {this.state.city}</p>
+        //                 <select value={this.state.value} onChange={this.selectChange.bind(this)}>
+        //                     {cities}
+        //                 </select>
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На радио
+        // // 6. Даны 3 радиокнопочки со значениями 1, 2 и 3. Дан абзац. Сделайте так, чтобы значение выбранной радиокнопочки выводилось в этот абзац.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {value: '1'};
+        //     };
+
+        //     radioChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Значение выбранной кнопки: {this.state.value}</p>
+        //                 <input type="radio" value="1" checked={this.state.value == '1'} onChange={this.radioChange.bind(this)} />
+        //                 <input type="radio" value="2" checked={this.state.value == '2'} onChange={this.radioChange.bind(this)}  />
+        //                 <input type="radio" value="3" checked={this.state.value == '3'} onChange={this.radioChange.bind(this)}  />
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App />, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // Практика
+        // // 7. Дан текстареа и кнопка. Дан также стейт texts с массивом текстов. 
+        // // Изначально этот массив пустой, но каждый раз по нажатию на кнопку в конец этого массива должно записаться текущее содержимое текстареа. 
+        // // Выведите содержимое массива this.state.texts так, чтобы каждый элемент массива выводился в новом абзаце.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {texts: [], value: ''};
+        //     };
+
+        //     getText(event){
+        //         this.state.texts.push(this.state.value);
+        //         this.setState({texts: this.state.texts});
+        //     };
+
+        //     textareaChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         const list  = this.state.texts.map((item, index) => {
+        //             return <p key={index}>{item}</p>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <textarea value={this.state.value} onChange={this.textareaChange.bind(this)} /><br/>
+        //                 <button onClick={this.getText.bind(this)}>Добавить текст</button>
+        //                 <div>{list}</div>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 8. Дан селект со списком CSS цветов. Дан абзац. Сделайте так, чтобы при смене цвета абзац красился в выбранный цвет.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {value: 'blue'};
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p style={{color: this.state.value, fontSize: '30px'}}>Я абзац, покрась меня!</p>
+        //                 <select value={this.state.value} onChange={this.selectChange.bind(this)}>
+        //                     <option value="blue">Синий</option>
+        //                     <option value="yellow">Желтый</option>
+        //                     <option value="green">Зеленый</option>
+        //                     <option value="red">Красный</option>
+        //                     <option value="orange">Оранжевый</option>
+        //                 </select>
+        //             </div>
+        //         )
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 9. Дан селект с двумя значениями: 'отмечено' и 'не отмечено'. 
+        // // Дан также чекбокс. Сделайте так, чтобы при изменении значения селекта, чекбокс менял свое состояние с 'отмечено' на 'не отмечено' и наоброт.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {checked: true};
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({checked: event.target.value});
+        //         this.setState({checked: !this.state.checked});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <select value={this.state.checked} onChange={this.selectChange.bind(this)}>
+        //                     <option value="true">Отмечено</option>
+        //                     <option value="false">Не отмечено</option>
+        //                 </select>
+        //                 <input type="checkbox" checked={this.state.checked} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 10. Дан селект и 3 абзаца. В селекте можно выбрать один из трех пунктов. Сделайте так, чтобы в зависимости от выбора на экране был виден один из трех абзацев.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {value: '0', textValue: 'Пункт 1'};
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({value: event.target.value});
+        //         this.setState({textValue: event.target[event.target.value].innerHTML});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>{this.state.textValue}</p>
+        //                 <select value={this.state.value} onChange={this.selectChange.bind(this)}>
+        //                     <option value="0">Пункт 1</option>
+        //                     <option value="1">Пункт 2</option>
+        //                     <option value="2">Пункт 3</option>
+        //                 </select>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 11. Дан инпут, кнопка и селект. Сделайте следующее: в инпут вводится какая-то строка и по нажатию на кнопку эта строка должна добавится в конец селекта в виде нового option.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {items: [
+        //                 'Пункт 1', 'Пункт 2', 'Пункт 3', 'Пункт 4', 'Пункт 5'
+        //             ], valueInput: '', valueSelect: '0'
+        //         };
+        //     };
+
+        //     inputChange(event){
+        //         this.setState({valueInput: event.target.value});
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({valueSelect: event.target.value});
+        //     };
+
+        //     addItem(){
+        //         this.state.items.push(this.state.valueInput);
+        //         this.setState({items: this.state.items});
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <option key={index} value={index}>{item}</option>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <input type="text" value={this.state.valueInput} onChange={this.inputChange.bind(this)}/>
+        //                 <button onClick={this.addItem.bind(this)}>Добавить</button><br/>
+        //                 <select value={this.state.valueSelect} onChange={this.selectChange.bind(this)}>
+        //                     {list}
+        //                 </select>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 12. Дан чекбокс и инпут. Сделайте так, чтобы если чекбокс не отмечен - то инпут находится в заблокированном состоянии (через disabled, а если отмечен - то в незаблокированном.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {checked: false};
+        //     };
+
+        //     checkboxChange(){
+        //         this.setState({checked: !this.state.checked});
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <input type="checkbox" checked={this.state.checked} onChange={this.checkboxChange.bind(this)}/>
+        //                 <input type="text" disabled={this.state.checked}/>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // 13. Даны 3 селекта. В первом можно выбрать день, во втором месяц, а в третьем год. Дан абзац. 
+        // Сделайте так, чтобы в этот абзац вывелся день недели за выбранную дату. Пусть по умолчанию в селекте отображается текущая дата.
+
+        class App extends React.Component{
+            constructor() {
+                super();
+                this.state = {
+                    days: this.getAllDays(), currentDay: this.getCurrentDay(),
+                    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], currentMonth: this.getCurrentMonth(),
+                    years: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'], currentYear: this.getCurrentYear(),
+                    weekday: this.getWeekDay()
+                };
+            };
+
+            getAllDays(){
+                let result  = [];
+                let date    = new Date();
+                let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+                
+                for(let i = 1; i <= lastDay; i++){
+                    result.push(i);
+                }
+                return result;
+            };
+
+            getAllFutureDays(year, month){
+                let result  = [];
+                let date    = new Date();
+                let lastDay = new Date(Number(year), Number(month) + 1, 0).getDate();
+                
+                for(let i = 1; i <= lastDay; i++){
+                    result.push(i);
+                }
+                return result;
+            };
+
+            getCurrentDay(){
+                let date = new Date();
+                return date.getDate();
+            };
+
+            getCurrentMonth(){
+                let date        = new Date();
+                return date.getMonth();
+            };
+
+            getCurrentYear(){
+                let date        = new Date();
+                return date.getFullYear();
+            };
+
+            selectDaysChange(event){
+                this.setState({currentDay: event.target.value});
+                this.setState({weekday: this.getFutureDay(this.state.currentYear, this.state.currentMonth, event.target.value)});
+            };
+
+            selectMonthsChange(event){
+                this.setState({currentMonth: event.target.value});
+                this.setState({days: this.getAllFutureDays(this.state.currentYear, event.target.value), currentDay: 1});
+                this.setState({weekday: this.getFutureDay(this.state.currentYear, event.target.value, 1)});
+            };
+
+            selectYearsChange(event){
+                this.setState({currentYear: event.target.value});
+                this.setState({days: this.getAllFutureDays(event.target.value, 0), currentMonth: 0, currentDay: 1});
+                this.setState({weekday: this.getFutureDay(event.target.value, this.state.currentMonth, 1)});
+            };
+
+            getWeekDay(){
+                let week    = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+                let nowDate = new Date();
+                let date    = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate()).getDay();
+
+                return week[date];
+            };
+
+            getFutureDay(year, month, day){
+                let week    = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+                let date    = new Date(Number(year), Number(month), Number(day)).getDay();
+
+                return week[date];
+            };
+
+            render(){
+                const days      = this.state.days.map((day, index) => {
+                    return <option key={index} value={day}>{day}</option>
+                });
+
+                const months    = this.state.months.map((month, index) => {
+                    return <option key={index} value={index}>{month}</option>
+                });
+
+                const years     = this.state.years.map((year, index) => {
+                    return <option key={index} value={year}>{year}</option>
+                });
+
+                return (
+                    <div>
+                        <p>{this.state.weekday}</p>
+                        <select value={this.state.currentDay} onChange={this.selectDaysChange.bind(this)}>{days}</select>
+                        <select value={this.state.currentMonth} onChange={this.selectMonthsChange.bind(this)}>{months}</select>
+                        <select value={this.state.currentYear} onChange={this.selectYearsChange.bind(this)}>{years}</select>
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App/>, document.getElementById('content'));
+    </script>
+</body>
+</html>
