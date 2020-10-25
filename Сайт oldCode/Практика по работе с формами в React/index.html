@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Практика по работе с формами в React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // Чекбоксы + массивы
+        // // 1. Дан массив. Выведите элементы этого массива в виде списка ul. Сделайте так, чтобы внутри каждой li был чекбокс, по нажатию на который содержимое чекбокса будет перечеркиваться.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4', 'Элемент 5'], checked: [false, false, false, false, false]};
+        //     };
+
+        //     checkboxChange(event){
+        //         this.state.checked[event.target.value] = !this.state.checked[event.target.value];
+        //         this.setState({checked: this.state.checked});
+
+        //         if(this.state.checked[event.target.value]){
+        //             event.target.parentElement.style.textDecoration = 'line-through';
+        //         }else{
+        //             event.target.parentElement.style.textDecoration = '';
+        //         }
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <li key={index}>{item}
+        //                 <input value={index} type="checkbox" checked={this.state.checked[index]} onChange={this.checkboxChange.bind(this)}/>
+        //             </li>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 2. Дан массив с работниками. У каждого работника есть имя, фамилия и зарплата. Выведите этих работников на экран в виде таблицы. 
+        // // Для каждого работника сделайте чекбокс, который изначально будет отмечен. Под таблицей выведите сумму зарплат тех работников, для которых чекбокс отмечен.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {workers: [
+        //                 {name: 'Петя', surname: 'Петров', salary: 70000, checked: true},
+        //                 {name: 'Иван', surname: 'Иванов', salary: 80000, checked: true},
+        //                 {name: 'Василий', surname: 'Сидоров', salary: 100000, checked: true},
+        //                 {name: 'Геннадий', surname: 'Сиверяков', salary: 150000, checked: true},
+        //                 {name: 'Дмитрий', surname: 'Кулаков', salary: 200000, checked: true},
+        //             ], salaryAll: '-'
+        //         };
+        //     };
+
+        //     checkboxChange(event){
+        //         let sum = 0;
+        //         this.state.workers[event.target.value].checked = !this.state.workers[event.target.value].checked;
+        //         this.setState({workers: this.state.workers});
+
+        //         for(let i = 0; i < this.state.workers.length; i++){
+        //             if(this.state.workers[i].checked){
+        //                 sum += this.state.workers[i].salary;
+        //             }
+        //         }
+        //         this.setState({salaryAll: sum});
+        //     };
+
+        //     getAllSalary(){
+        //         let sum = 0;
+        //         for(let i = 0; i < this.state.workers.length; i++){
+        //             sum += this.state.workers[i].salary;
+        //         }
+        //         return sum;
+        //     };
+
+        //     render(){
+        //         const workers = this.state.workers.map((work, index) => {
+        //             return <tr key={index}>
+        //                 <td>{work.name}</td>
+        //                 <td>{work.surname}</td>
+        //                 <td className='salary'>{work.salary}</td>
+        //                 <td><input type="checkbox" value={index} checked={work.checked} onChange={this.checkboxChange.bind(this)}/></td>
+        //             </tr>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {workers}
+        //                     </tbody>
+        //                 </table>
+        //                 <p>Общая зарплата составит: {this.state.salaryAll == '-' ? this.getAllSalary() : this.state.salaryAll} рублей</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // // Чекбоксы + ифы
+        // // 3. Дан массив. Выведите каждый элемент этого массива в отдельном абзаце. 
+        // // Сделайте так, чтобы над каждым абзацем был чекбокс, со следующим поведением: если он отмечен - абзац под ним есть на экране, а если не отмечен - абзаца нет. 
+        // // По умолчанию пусть все чекбоксы отмечены.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {items: [
+        //                 {name: 'Элемент 1', chacked: true},
+        //                 {name: 'Элемент 2', chacked: true},
+        //                 {name: 'Элемент 3', chacked: true},
+        //                 {name: 'Элемент 4', chacked: true},
+        //                 {name: 'Элемент 5', chacked: true},
+        //             ]
+        //         };
+        //     };
+
+        //     checkboxChange(event){
+        //         this.state.items[event.target.value].chacked = !this.state.items[event.target.value].chacked;
+        //         this.setState({items: this.state.items});
+
+        //         if(!this.state.items[event.target.value].chacked){
+        //             event.target.nextElementSibling.style.display = 'none';
+        //         }else{
+        //             event.target.nextElementSibling.style.display = 'block';
+        //         }
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <div key={index}>
+        //                 <input type="checkbox" value={index} checked={item.chacked} onChange={this.checkboxChange.bind(this)}/>
+        //                 <p>{item.name}</p>
+        //             </div>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {list}
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 4. Дан массив с юзерами:
+        // // this.state = {
+        // //     users: [
+        // //         {name: 'Коля', surname: 'Иванов', age: 30},
+        // //         {name: 'Вася', surname: 'Петров', age: 40},
+        // //         {name: 'Петя', surname: 'Сидоров', age: 50},
+        // //     ]
+        // // };
+        // // Выведите элементы этого массива в виде списка ul. Имя, фамилия и возраст каждого юзера должны стоять в одной li через пробел. Внутри каждой li сделайте чекбокс. 
+        // // Если чекбокс не отмечен, то в li должно быть только имя юзера, а если отмечен - имя, фамилия и возраст.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Коля', surname: 'Иванов', age: 30},
+        //                 {name: 'Вася', surname: 'Петров', age: 40},
+        //                 {name: 'Петя', surname: 'Сидоров', age: 50},
+        //             ], checked: [true, true, true]
+        //         };
+        //     };
+
+        //     checkboxChange(event){
+        //         this.state.checked[event.target.value] = !this.state.checked[event.target.value];
+        //         this.setState({checked: this.state.checked});
+        //     };
+
+        //     render(){
+        //         const list = this.state.users.map((user, index) => {
+        //             return <li key={index}>{this.state.checked[index] ? user.name + ' ' + user.surname + ' ' + user.age + ' лет' : user.name}
+        //                 <input type="checkbox" value={index} checked={this.state.checked[index]} onChange={this.checkboxChange.bind(this)} />
+        //             </li>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // Редактирование элементов
+        // // 5. Дан массив. Выведите элементы этого массив в виде списка ul. Сделайте так, чтобы по нажатию на li внутри нее появился инпут, с помощью которого можно будет поредактировать текст этой li. 
+        // // По потери фокуса текст из инпута должен записаться обратно в li, а инпут исчезнуть.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4', 'Элемент 5']};
+        //     };
+
+        //     editElem(event){
+        //         event.target.innerHTML = '';
+        //         let input = document.createElement('input');
+        //         input.type = 'text';
+        //         event.target.append(input);
+
+        //         let self = event.target;
+
+        //         input.addEventListener('blur', function(){
+        //             self.innerHTML = this.value;
+        //             this.remove();
+        //         });
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <li key={index} onClick={this.editElem}>{item}</li>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 6. Дан следующий массив:
+        // // this.state = {
+        // //     users: [
+        // //         {name: 'Коля', age: 30},
+        // //         {name: 'Вася', age: 40},
+        // //         {name: 'Петя', age: 50},
+        // //     ]
+        // // };
+        // // Выведите его на экран в виде таблицы:
+        // // <table>
+        // //     <tr>
+        // //         <td>Коля</td><td>30</td>
+        // //     </tr>
+        // //     <tr>
+        // //         <td>Вася</td><td>40</td>
+        // //     </tr>
+        // //     <tr>
+        // //         <td>Петя</td><td>50</td>
+        // //     </tr>
+        // // </table>
+        // // Сделайте так, чтобы внутри каждой td была кнопка 'редактировать', по нажатию на которую текст этой td можно будет поредактировать с помощью появившегося в ней инпута.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Коля', age: 30},
+        //                 {name: 'Вася', age: 40},
+        //                 {name: 'Петя', age: 50},
+        //             ]
+        //         };
+        //     };
+
+        //     changeName(event){
+        //         event.target.parentElement.previousElementSibling.innerHTML = '';
+        //         let input = document.createElement('input');
+        //         input.type = 'text';
+        //         event.target.parentElement.previousElementSibling.append(input);
+
+        //         let self        = event.target;
+        //         let globSelf    = this;
+
+        //         input.addEventListener('blur', function(){
+        //             globSelf.state.users[self.value].name = this.value;
+        //             globSelf.setState({users: globSelf.state.users});
+        //             this.remove();
+        //         });
+        //     };
+
+        //     changAge(event){
+        //         console.log(event.target.parentElement.previousElementSibling)
+        //         event.target.parentElement.previousElementSibling.innerHTML = '';
+        //         let input = document.createElement('input');
+        //         input.type = 'text';
+        //         event.target.parentElement.previousElementSibling.append(input);
+
+        //         let globSelf    = this;
+        //         let self        = event.target;
+
+        //         input.addEventListener('blur', function(){
+        //             globSelf.state.users[self.value].age = this.value;
+        //             globSelf.setState({users: globSelf.state.users});
+        //             this.remove();
+        //         });
+        //     };
+
+        //     render(){
+        //         const list = this.state.users.map((user, index) => {
+        //             return <tr key={index}>
+        //                 <td>{user.name}</td><td><button value={index} onClick={this.changeName.bind(this)}>Редактировать</button></td>
+        //                 <td>{user.age}</td><td><button value={index} onClick={this.changAge.bind(this)}>Редактировать</button></td>
+        //             </tr>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {list}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // Практика
+        // // 7. Дан массив с туристическими маршрутами. Выведите эти маршруты на экран так, чтобы рядом с каждым стояла радио-кнопочка. 
+        // // Пользователь может выбрать один из маршрутов. Его выбор должен отобразиться на экране в абзаце.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {routes: ['Маршрут 1', 'Маршрут 2', 'Маршрут 3', 'Маршрут 4', 'Маршрут 5'], checked: [false, false, false, false, false], value: ''};
+        //     };
+
+        //     radioChange(event){
+        //         this.state.checked[event.target.value] = !this.state.checked[event.target.value];
+        //         this.setState({checked: this.state.checked});
+        //         this.setState({value: this.state.routes[event.target.value]});
+        //     };
+
+        //     render(){
+        //         const list = this.state.routes.map((route, index) => {
+        //             return <div key={index}>
+        //                 <p>{route}</p><input type="radio" name="lang" value={index} checked={this.state.checked[index]} onChange={this.radioChange.bind(this)} />
+        //             </div>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {list}
+        //                 <p>{this.state.value}</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 8. Дан текстареа и кнопка. В текстареа пользователь нашего сайта будет вводить свои заметки. После нажатия на кнопку введенный текст должен появится под текстареа в виде блока div. 
+        // // Таких заметок может быть много. 
+        // // В каждой заметке должен стоять заголовок (заметка1, заметка2 и так далее), время создания заметки (часы, минуты, секунды), а также должна быть кнопка 'удалить' и кнопка 'редактировать'.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {notes: [], textareaText: '', time: ''};
+        //     };
+
+        //     textareaChange(event){
+        //         this.setState({textareaText: event.target.value});
+        //     };
+
+        //     addClock(){
+        //         let date    = new Date();
+        //         return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+        //     };
+
+        //     addNote(){
+        //         this.state.notes.push({text: this.state.textareaText, time: this.addClock()});
+        //         this.setState({notes: this.state.notes});
+        //     };
+
+        //     removeNote(event){
+        //         this.state.notes.splice(Number(event.target.parentElement.dataset.value), 1);
+        //         this.setState({notes: this.state.notes});
+        //     };
+
+        //     editNote(event){
+        //         let input       = document.createElement('input');
+        //         input.type      = 'text';
+        //         let elem        = event.target.previousElementSibling.previousElementSibling.previousElementSibling;
+        //         elem.innerHTML  = '';
+        //         elem.append(input);
+
+        //         let self        = this;
+        //         let eventSelf   = event.target;
+
+        //         input.addEventListener('blur', function(){
+        //             self.state.notes[eventSelf.parentElement.dataset.value].text = this.value;
+        //             self.setState({notes: self.state.notes});
+        //             this.remove();
+        //         });
+        //     };
+
+        //     render(){
+        //         const list = this.state.notes.map((note, index) => {
+        //             return <div key={index} data-value={index}>
+        //                 <p className='note'>Заметка {index + 1}, <span className='time'>Время создания заметки: {note.time}</span></p>
+        //                 <p>{note.text}</p><br/>
+        //                 <button onClick={this.removeNote.bind(this)}>Удалить</button>
+        //                 <button onClick={this.editNote.bind(this)}>Редактировать</button>
+        //             </div>;
+        //         });
+                
+        //         return (
+        //             <div>
+        //                 <textarea value={this.state.textareaText} onChange={this.textareaChange.bind(this)} /><br/>
+        //                 <button onClick={this.addNote.bind(this)}>Добавить запись</button>
+        //                 {list}
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 9. Дан массив с работниками. У каждого работника есть имя, фамилия, зарплата. Выведите этих работников на экран в виде таблицы. 
+        // // Сделайте так, чтобы работников можно было посортировать по любой колонке этот таблицы.
+
+        // class App extends React.Component {
+        //     constructor() {
+        //     super();
+        //     this.state = {workers: [
+        //             {name: 'Mike', surname: 'Tyson', salary: 2e+7},
+        //             {name: 'Manny', surname: 'Pacquiao', salary: 15e+7},
+        //             {name: 'Floyd', surname: 'Mayweather', salary: 25e+7},
+        //         ]};
+        //     };
+            
+        //     handleSort(value){
+        //         function compare(a,b) {
+        //             if (a[value] < b[value])
+        //             return -1;
+        //             if (a[value] > b[value])
+        //             return 1;
+        //             return 0;
+        //         };
+
+        //         const newWorkers = this.state.workers.sort(compare);
+        //         this.setState({workers: newWorkers});
+        //     };
+
+        //     render() {
+        //         const capt = <tr>
+        //             <th onClick={this.handleSort.bind(this, 'name')}>Name</th>
+        //             <th onClick={this.handleSort.bind(this, 'surname')}>Surname</th>
+        //             <th onClick={this.handleSort.bind(this, 'salary')}>Salary</th>
+        //         </tr>;
+                
+        //         const body = this.state.workers.map((item, index)=>{
+        //             return <tr key ={index}>
+        //             <td>{item.name}</td><td>{item.surname}</td><td>{item.salary}</td>
+        //             </tr>
+        //         });
+
+        //         return <div>
+        //             <table>
+        //             <thead>{capt}</thead>
+        //             <tbody>{body}</tbody>
+        //             </table>
+        //         </div>
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 10. Даны два селекта. С помощью первого селекта можно выбрать язык пользователя (русский или английский). 
+        // // Если в первом селекте выбран русский язык, то во втором селекте должен появится список дней недели по-русски. 
+        // // А если в первом селекте выбран английский - то и во втором дни недели будут по-английски.
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {langs: ['Русский', 'Английский'], ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+        //         eng: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], value: '0'};
+        //     };
+
+        //     selectLangsChange(event){
+        //         this.setState({value: event.target.value});
+        //     };
+
+        //     render(){
+        //         const lang  = this.state.langs.map((lang, index) => {
+        //             return <option key={index} value={index}>{lang}</option>
+        //         });
+
+        //         const ru    = this.state.ru.map((lang, index) => {
+        //             return <option key={index} value={index}>{lang}</option>
+        //         });
+
+        //         const eng   = this.state.eng.map((lang, index) => {
+        //             return <option key={index} value={index}>{lang}</option>
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <select value={this.state.value} onChange={this.selectLangsChange.bind(this)}>
+        //                     {lang}
+        //                 </select>
+        //                 <select>
+        //                     {this.state.value == 0 ? ru : eng}
+        //                 </select>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 11. Дан инпут. В него вводится строка. Сделайте так, чтобы если длина введенной строки от 4 до 9 символов - граница инпута была зеленой, в противном случае - красной. 
+        // // Инпут должен проверять свое содержимое по мере ввода.
+    
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {value: ''};
+        //     };
+
+        //     inputChange(event){
+        //         this.setState({value: event.target.value});
+        //         let length = this.state.value.length;
+                
+        //         if(length >= 3 && length <= 8){
+        //             event.target.style.backgroundColor  = 'green';
+        //         }else{
+        //             event.target.style.backgroundColor  = 'red';
+        //         }
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <input type="text" value={this.state.value} onChange={this.inputChange.bind(this)} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 12. Дан массив с работниками. У каждого работника есть имя, фамилия, зарплата, пол. Выведите этих работников на экран в виде таблицы. 
+        // // Под таблицей сделайте форму, с помощью которой в таблицу можно будет добавить нового работника. 
+        // // В этой форме имя, фамилия, зарплата будут инпутами, а пол - селектом, в котором можно будет выбрать один из двух вариантов.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {workers: [
+        //             {name: 'Имя', surname: 'Фамилия', salary: 'Зарплата', gender: 'Пол'},
+        //             {name: 'Илья', surname: 'Петров', salary: '50000', gender: 'Мужчина'},
+        //             {name: 'Иван', surname: 'Сидоров', salary: '100000', gender: 'Мужчина'},
+        //             {name: 'Василий', surname: 'Калашников', salary: '150000', gender: 'Мужчина'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000', gender: 'Женщина'}
+        //         ], nameValue: '', surnameValue: '', salaryValue: '', selectValue: 'Мужчина'};
+        //     };
+
+        //     inputNameChange(event){
+        //         this.setState({nameValue: event.target.value});
+        //     };
+
+        //     inputSurnameChange(event){
+        //         this.setState({surnameValue: event.target.value});
+        //     };
+
+        //     inputSalaryChange(event){
+        //         this.setState({salaryValue: event.target.value});
+        //     };
+
+        //     selectValueChange(event){
+        //         this.setState({selectValue: event.target.value});
+        //     };
+
+        //     addWorker(event){
+        //         event.preventDefault();
+                
+        //         this.state.workers.push({name: this.state.nameValue, surname: this.state.surnameValue, salary: this.state.salaryValue, gender: this.state.selectValue});
+        //         this.setState({workers: this.state.workers});
+        //     };
+
+        //     render(){
+        //         const workers = this.state.workers.map((worker, index) => {
+        //             return <tr key={index}>
+        //                 <td>{worker.name}</td>
+        //                 <td>{worker.surname}</td>
+        //                 <td>{worker.salary}</td>
+        //                 <td>{worker.gender}</td>
+        //             </tr>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {workers}
+        //                     </tbody>
+        //                 </table>
+        //                 <form onSubmit={this.addWorker.bind(this)}>
+        //                     <input type="text" value={this.state.nameValue} onChange={this.inputNameChange.bind(this)} placeholder='Имя' />
+        //                     <input type="text" value={this.state.surnameValue} onChange={this.inputSurnameChange.bind(this)} placeholder='Фамилия' />
+        //                     <input type="text" value={this.state.salaryValue} onChange={this.inputSalaryChange.bind(this)} placeholder='Зарплата' />
+        //                     <select value={this.state.selectValue} onChange={this.selectValueChange.bind(this)}>
+        //                         <option value="Мужчина">Мужчина</option>
+        //                         <option value="Женщина">Женщина</option>
+        //                     </select><br/>
+        //                     <input type="submit" value='Добавить работника' />
+        //                 </form>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 13. Дан массив с работниками. У каждого работника есть имя, фамилия, зарплата. 
+        // // Выведите этих работников на экран в виде таблицы. Причем выведите только первых 10 работников, а над таблицей сделайте ссылки: 1, 2, 3, 4 и так далее. 
+        // // По нажатию на каждую ссылку в таблице будет отображаться заданный десяток работников. Ссылки над таблицей должны сгенерироваться автоматически исходя из количества работников.
+        // // НЕ РЕШЕНА!
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {workers: [
+        //             {name: 'Имя', surname: 'Фамилия', salary: 'Зарплата'},
+        //             {name: 'Илья', surname: 'Петров', salary: '50000'},
+        //             {name: 'Иван', surname: 'Сидоров', salary: '100000'},
+        //             {name: 'Василий', surname: 'Калашников', salary: '150000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //             {name: 'Екатерина', surname: 'Смирнова', salary: '200000'},
+        //         ], links: [], workersLink: []};
+        //         this.checkLinks();
+        //     };
+
+        //     checkLinks(){
+        //         let length      = this.state.workers.length;
+        //         let lengthLinks = Math.ceil(length / 10);
+                
+        //         for(let i = 1; i <= lengthLinks; i++){
+        //             this.state.links.push(i);
+        //         }
+        //     };
+
+        //     render(){
+        //         const links     = this.state.links.map((link, index) => {
+        //             return <a key={index} href="#">{link} </a>;
+        //         });
+
+        //         const workers   = this.state.workers.map((worker, index) => {
+        //             return <tr key={index}>
+        //                 <td>{worker.name}</td>
+        //                 <td>{worker.surname}</td>
+        //                 <td>{worker.salary}</td>
+        //             </tr>;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {links}
+        //                 <table>
+        //                     <tbody>
+        //                         {workers}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 14. Дан селект. Изначально он пустой. Дан инпут и кнопка. В этот инпут вводится название города. По нажатию на кнопку этот город должен попасть в селект. 
+        // // Пользователь нашего скрипта добавляет несколько городов в селект, затем выбирает один из добавленных городов - и этот город должен отобразиться на экране в каком-нибудь абзаце.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {valueSelects: [], valueInput: '', valueSelect: '0', info: ''};
+        //     };
+
+        //     inputChange(event){
+        //         this.setState({valueInput: event.target.value});
+        //     };
+
+        //     addSelectOption(){
+        //         this.state.valueSelects.push(this.state.valueInput);
+        //         this.setState({valueSelects: this.state.valueSelects});
+        //         this.setState({valueInput: '', valueSelect: '', info: ''});
+        //     };
+
+        //     selectChange(event){
+        //         this.setState({valueSelect: event.target.value});
+        //         this.setState({info: this.state.valueSelects[event.target.value]});
+        //     };
+
+        //     render(){
+        //         const list = this.state.valueSelects.map((value, index) => {
+        //             return <option key={index} value={index}>{value}</option>
+        //         });
+                
+        //         return (
+        //             <div>
+        //                 <select value={this.state.valueSelect} onChange={this.selectChange.bind(this)}>{list}</select>
+        //                 <input type="text" value={this.state.valueInput} onChange={this.inputChange.bind(this)} />
+        //                 <button onClick={this.addSelectOption.bind(this)}>Добавить</button>
+        //                 <p>{this.state.info}</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 15. Реализуйте калькулятор валют. Как он работает: дан инпут, в который вводится сумма и даны два селекта - в первом выбирается из какой валюты, а во втором - в какую. Дана также кнопка. 
+        // // По нажатию на эту кнопку в абзац должна вывестись сумма в выбранной валюте.
+
+        // class App extends React.Component{
+        //     constructor() {
+        //         super();
+        //         this.state = {valueFirstValut: 'Рубли', valueSecondValut: 'Доллары', valueInput: '', info: ''};
+        //     };
+
+        //     inputChange(event){
+        //         this.setState({valueInput: event.target.value});
+        //     };
+
+        //     firstSelectChange(event){
+        //         this.setState({valueFirstValut: event.target.value});
+        //     };
+
+        //     secondSelectChange(event){
+        //         this.setState({valueSecondValut: event.target.value});
+        //     };
+
+        //     convertValut(){
+        //         if(this.state.valueFirstValut == 'Рубли' && this.state.valueSecondValut == 'Доллары'){
+        //             let sum = (Number(this.state.valueInput) * 0.013).toFixed(2);
+        //             this.setState({info: sum + ' Долларов'});
+        //         }else if(this.state.valueFirstValut == 'Доллары' && this.state.valueSecondValut == 'Рубли'){
+        //             let sum = (Number(this.state.valueInput) * 76.47).toFixed(2);
+        //             this.setState({info: sum + ' Рублей'});
+        //         }else{
+        //             this.setState({info: 'Перевод в одинаковых валютах!'});
+        //         }
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <input type="text" value={this.state.valueInput} onChange={this.inputChange.bind(this)} />
+        //                 <select value={this.state.valueFirstValut} onChange={this.firstSelectChange.bind(this)}>
+        //                     <option value="Рубли">Рубли</option>
+        //                     <option value="Доллары">Доллары</option>
+        //                 </select>
+        //                 <select value={this.state.valueSecondValut} onChange={this.secondSelectChange.bind(this)}>
+        //                     <option value="Доллары">Доллары</option>
+        //                     <option value="Рубли">Рубли</option>
+        //                 </select>
+        //                 <button onClick={this.convertValut.bind(this)}>Рассчитать</button>
+        //                 <p>{this.state.info}</p>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // 16. Дан следующий массив с вопросами и вариантами ответов:
+        // this.state = {
+        //     test: [
+        //         {
+        //             question: 'Вопрос 1',
+        //             answers: [
+        //                 'Ответ1',
+        //                 'Ответ2',
+        //                 'Ответ3',
+        //                 'Ответ4',
+        //                 'Ответ5',
+        //             ],
+        //             right: 3, //номер правильного ответа
+        //         },
+        //         {
+        //             ...
+        //         },
+        //         {
+        //             ...
+        //         },
+        //     ]
+        // };
+        // Реализуйте текст с вопросами и вариантами ответов. Каждый вопрос должен быть в своем абзаце, а под ним - 5 радиокнопочек, с помощью которых можно выбрать один из ответов. 
+        // Если ответ правильный - вопрос должен покраситься в зеленый цвет, а если неправильный - в красный.
+
+        class App extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    test: [
+                        {
+                            question: 'Сколько будет 2*2?',
+                            answers: [
+                                '5',
+                                '10',
+                                '4',
+                                '6',
+                                '12',
+                            ],
+                            right: 3, //номер правильного ответа
+                            valueRadio: [false, false, false, false, false],
+                            answerPerson: ''
+                        },
+                        {
+                            question: 'Карьерист не по заслугам?',
+                            answers: [
+                                'Сотрудник',
+                                'Выскочка',
+                                'Отличник',
+                                'Рабочий',
+                                'Коллектор',
+                            ],
+                            right: 2, //номер правильного ответа
+                            valueRadio: [false, false, false, false, false],
+                            answerPerson: ''
+                        },
+                        {
+                            question: 'Птичка, которая умеет летать назад?',
+                            answers: [
+                                'Ворона',
+                                'Ласточка',
+                                'Аист',
+                                'Голубь',
+                                'Коллибри',
+                            ],
+                            right: 5, //номер правильного ответа
+                            valueRadio: [false, false, false, false, false],
+                            answerPerson: ''
+                        },
+                    ]
+                };
+            };
+
+            radioChange(event){
+                let questions = document.querySelectorAll('.questions');
+
+                for(let i = 0; i < this.state.test[event.target.dataset.index].valueRadio.length; i++){
+                    this.state.test[event.target.dataset.index].valueRadio[i] = false;
+                }
+
+                this.state.test[event.target.dataset.index].valueRadio[event.target.value] = !this.state.test[event.target.dataset.index].valueRadio[event.target.value];
+                this.setState({test: this.state.test});
+                this.state.test[event.target.dataset.index].answerPerson = event.target.dataset.answer;
+                this.setState({test: this.state.test});
+
+                if(this.state.test[event.target.dataset.index].answerPerson == this.state.test[event.target.dataset.index].answers[this.state.test[event.target.dataset.index].right - 1]){
+                    questions[event.target.dataset.index].style.color = 'green';
+                }else{
+                    questions[event.target.dataset.index].style.color = 'red';
+                }
+            };
+
+            render(){
+                const questions = this.state.test.map((questionG, index) => {
+                    const answers = this.state.test[index].answers.map((answer, index) => {
+                        return <p key={index}>{answer}</p>;
+                    });
+
+                    const radio = this.state.test[index].answers.map((answer, indexex) => {
+                        return <input key={indexex} type="radio" name={questionG.question} value={indexex} data-index={index} data-answer={this.state.test[index].answers[indexex]}
+                                checked={this.state.test[index].valueRadio[indexex]} onChange={this.radioChange.bind(this)} />;
+                    });
+
+                    return <div key={index}>
+                        <p className="questions" style={{fontSize: '25px'}}>{questionG.question}</p>
+                        <div>{answers}</div>
+                        <div>{radio}</div>
+                    </div>;
+                });
+
+                return (
+                    <div>
+                        {questions}
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App/>, document.getElementById('content'));
+    </script>
+</body>
+</html>
