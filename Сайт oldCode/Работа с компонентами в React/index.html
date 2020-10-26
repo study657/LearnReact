@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <title>Работа с компонентами в React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // 1. Пусть в стейте хранится массив с юзерами. У каждого юзера есть имя, фамилия и возраст. Выведите всех юзеров на экран с помощью цикла. 
+        // // Сделайте так, чтобы отображением юзера на экран занимался отдельный компонент.
+
+        // // ПЕРВЫЙ ВАРИАНТ РЕШЕНИЯ
+        // class Users extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <p>Имя: {this.props.name}, Фамилия: {this.props.surname}, Возраст: {this.props.age} </p>
+        //             </div>
+        //         )
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {users: 
+        //             [
+        //                 {name: 'Иван', surname: 'Иванов', age: 20},
+        //                 {name: 'Василий', surname: 'Симонов', age: 21},
+        //                 {name: 'Роман', surname: 'Новинский', age: 22},
+        //                 {name: 'Константин', surname: 'Петров', age: 23},
+        //                 {name: 'Александр', surname: 'Михайлов', age: 24}
+        //             ]
+        //         };
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <Users key={index} name={user.name} surname={user.surname} age={user.age} />
+        //         });
+
+        //         return (
+        //             <div>
+        //                 {users}
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // ВТОРОЙ ВАРИАНТ РЕШЕНИЯ
+        class Users extends React.Component{
+            constructor(){
+                super();
+            };
+
+            render(){
+                return (
+                    <div>
+                        <p>{this.props.name}</p>
+                        <p>{this.props.surname}</p>
+                        <p>{this.props.age} лет</p>
+                    </div>
+                );
+            };
+        };
+
+        class App extends React.Component{
+            constructor(){
+                super();
+                this.state = {users: 
+                    [
+                        {name: 'Иван', surname: 'Иванов', age: 20},
+                        {name: 'Василий', surname: 'Симонов', age: 21},
+                        {name: 'Роман', surname: 'Новинский', age: 22},
+                        {name: 'Константин', surname: 'Петров', age: 23},
+                        {name: 'Александр', surname: 'Михайлов', age: 24}
+                    ]
+                };
+            };
+
+            render(){
+                const users = this.state.users.map((user, index) => {
+                    return <Users name={user.name} surname={user.surname} age={user.age} />;
+                });
+
+                return (
+                    <div>
+                        {users}
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App/>, document.getElementById('content'));
+    </script>
+</body>
+</html>
