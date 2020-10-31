@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Продвинутая работа с компонентами в React</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script type="text/babel">
+        // // На методы
+        // // 1. Пусть в стейте хранится массив с юзерами. У каждого юзера есть имя, фамилия и возраст. 
+        // // Выведите всех юзеров на экран в виде таблицы. Пусть отображением юзера на экран занимается отдельный компонент.
+
+        // class User extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.surname}</td>
+        //                 <td>{this.props.age}</td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Имя', surname: 'Фамилия', age: 'Возраст'},
+        //                 {name: 'Коля', surname: 'Иванов', age: 22},
+        //                 {name: 'Вася', surname: 'Петров', age: 25},
+        //                 {name: 'Николая', surname: 'Разгуляев', age: 27},
+        //                 {name: 'Светлана', surname: 'Тихоновна', age: 30},
+        //                 {name: 'Ребекка', surname: 'Борн', age: 34}
+        //             ]
+        //         };
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <User key={index} name={user.name} surname={user.surname} age={user.age} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {users}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 2. Модифицируйте предыдущую задачу. Пусть у компонента-родителя есть метод showMessage, который алертом выводит '!'. 
+        // // Передайте этот метод в компонент-потомок. 
+        // // В таблице с юзерами сделайте еще одну колонку со ссылками. Привяжите к клику по этим ссылкам переданный метод.
+
+        // class User extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.surname}</td>
+        //                 <td>{this.props.age}</td>
+        //                 <td><a href="#" onClick={this.props.showMessage}>Ссылка</a></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Имя', surname: 'Фамилия', age: 'Возраст'},
+        //                 {name: 'Коля', surname: 'Иванов', age: 22},
+        //                 {name: 'Вася', surname: 'Петров', age: 25},
+        //                 {name: 'Николая', surname: 'Разгуляев', age: 27},
+        //                 {name: 'Светлана', surname: 'Тихоновна', age: 30},
+        //                 {name: 'Ребекка', surname: 'Борн', age: 34}
+        //             ]
+        //         };
+        //     };
+
+        //     showMessage(){
+        //         alert('!');
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <User key={index} name={user.name} surname={user.surname} age={user.age} showMessage={this.showMessage} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {users}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 3. Модифицируйте предыдущую задачу. Пусть теперь showMessage параметром принимает строку и выводит ее на экран. Сделайте так, чтобы по клику на ссылку выводилось имя соответствующего юзера.
+
+        // class User extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.surname}</td>
+        //                 <td>{this.props.age}</td>
+        //                 <td><a href="#" onClick={this.props.showMessage.bind(null, this.props.name)}>Ссылка</a></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Имя', surname: 'Фамилия', age: 'Возраст'},
+        //                 {name: 'Коля', surname: 'Иванов', age: 22},
+        //                 {name: 'Вася', surname: 'Петров', age: 25},
+        //                 {name: 'Николая', surname: 'Разгуляев', age: 27},
+        //                 {name: 'Светлана', surname: 'Тихоновна', age: 30},
+        //                 {name: 'Ребекка', surname: 'Борн', age: 34}
+        //             ]
+        //         };
+        //     };
+
+        //     showMessage(string){
+        //         alert(string);
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <User key={index} name={user.name} surname={user.surname} age={user.age} showMessage={this.showMessage} name={user.name} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {users}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 4. Модифицируйте предыдущую задачу. Пусть теперь showMessage параметром принимает число и выводит его на экран. 
+        // // Сделайте так, чтобы по клику на ссылку на экран выводился номер юзера в массиве юзеров.
+    
+        // class User extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.surname}</td>
+        //                 <td>{this.props.age}</td>
+        //                 <td><a href="#" onClick={this.props.showMessage.bind(null, this.props.index)}>Ссылка</a></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Имя', surname: 'Фамилия', age: 'Возраст'},
+        //                 {name: 'Коля', surname: 'Иванов', age: 22},
+        //                 {name: 'Вася', surname: 'Петров', age: 25},
+        //                 {name: 'Николая', surname: 'Разгуляев', age: 27},
+        //                 {name: 'Светлана', surname: 'Тихоновна', age: 30},
+        //                 {name: 'Ребекка', surname: 'Борн', age: 34}
+        //             ]
+        //         };
+        //     };
+
+        //     showMessage(index){
+        //         alert(index);
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <User key={index} name={user.name} surname={user.surname} age={user.age} showMessage={this.showMessage} index={index} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {users}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 5. Модифицируйте предыдущую задачу. Поменяйте showMessage на deleteUser и сделайте так, чтобы по клику на ссылку юзер удалялся из таблицы.
+
+        // class User extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.surname}</td>
+        //                 <td>{this.props.age}</td>
+        //                 <td><a href="#" onClick={this.props.showMessage.bind(null, this.props.index)}>Ссылка</a></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             users: [
+        //                 {name: 'Имя', surname: 'Фамилия', age: 'Возраст'},
+        //                 {name: 'Коля', surname: 'Иванов', age: 22},
+        //                 {name: 'Вася', surname: 'Петров', age: 25},
+        //                 {name: 'Николая', surname: 'Разгуляев', age: 27},
+        //                 {name: 'Светлана', surname: 'Тихоновна', age: 30},
+        //                 {name: 'Ребекка', surname: 'Борн', age: 34}
+        //             ]
+        //         };
+        //     };
+
+        //     showMessage(index){
+        //         this.state.users.splice(index, 1);
+        //         this.setState({users: this.state.users});
+        //     };
+
+        //     render(){
+        //         const users = this.state.users.map((user, index) => {
+        //             return <User key={index} name={user.name} surname={user.surname} age={user.age} showMessage={this.showMessage.bind(this)} index={index} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         {users}
+        //                     </tbody>
+        //                 </table>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // На редактирование
+        // // 6. Дан массив. Выведите его элементы в виде списка ul. Сделайте так, чтобы элементы массива выводились в отдельном компоненте. Рядом с текстом li сделайте ссылку 'редактировать'. 
+        // // По нажатию на эту ссылку она должна исчезнуть, а взамен должен появиться инпут, с помощью которого можно будет поредактировать текст li. 
+        // // По потери фокуса из инпута он должен исчезнуть, а взамен должна вернуться ссылка 'редактировать'.
+
+        // class Item extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <li style={{display: 'inline-block'}} data-value={this.props.value}>{this.props.elem}</li><a style={{whiteSpace: 'nowrap'}} href="#" onClick={this.props.editElem.bind(null)}> Редактировать</a>
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {items: ['Элемент 1', 'Элемент 2', 'Элемент 3', 'Элемент 4', 'Элемент 5']};
+        //     };
+
+        //     editElem(event){
+        //         let index       = Number(event.target.previousElementSibling.dataset.value);
+        //         let elem        = event.target.previousElementSibling;
+        //         elem.innerHTML  = '';
+        //         let input       = document.createElement('input');
+        //         input.type      = 'text';
+        //         input.value     = this.state.items[index];
+        //         let self        = this;
+        //         let elemSelf    = event.target;
+        //         elem.append(input);
+        //         event.target.innerHTML = '';
+
+        //         input.addEventListener('blur', function(){
+        //             let text    = this.value;
+        //             elemSelf.innerHTML = ' Редактировать';
+        //             self.state.items[index] = text;
+        //             self.setState({items: self.state.items});
+        //         });
+        //     };
+
+        //     render(){
+        //         const list = this.state.items.map((item, index) => {
+        //             return <Item key={index} value={index} elem={item} editElem={this.editElem.bind(this)} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <ul>
+        //                     {list}
+        //                 </ul>
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // // Практика
+        // // 7. Пусть в стейте хранится массив с продуктами. У каждого продукта есть название, цена и количество. 
+        // // Выведите все продукты на экран в виде таблицы. 
+        // // Сделайте так, чтобы в таблице была колонка, в которой выводится полная стоимость продукта (цена умножить на количество).
+        // // Пусть отображением продукта на экран занимается отдельный компонент. 
+        // // Сделайте так, чтобы рядом с каждым продуктом была кнопка 'удалить', с помощью которой можно удалить этот продукт из таблицы.
+
+        // class Product extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.price}</td>
+        //                 <td>{this.props.quantity}</td>
+        //                 <td>{this.props.allQuantity}</td>
+        //                 <td><button onClick={this.props.deleteProduct.bind(null)}>Удалить</button></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             products: [
+        //                 {name: 'Телефон', price: 10000, quantity: 1},
+        //                 {name: 'Машина', price: 1000000, quantity: 1},
+        //                 {name: 'Наушники', price: 1000, quantity: 8},
+        //                 {name: 'Компьютер', price: 90000, quantity: 8},
+        //                 {name: 'Мышка', price: 3500, quantity: 8},
+        //                 {name: 'Клавиатура', price: 2200, quantity: 8}
+        //             ]
+        //         };
+        //     };
+
+        //     deleteProduct(index){
+        //         this.state.products.splice(index, 1);
+        //         this.setState({products: this.state.products});
+        //     };
+
+        //     render(){
+        //         const products = this.state.products.map((product, index) => {
+        //             return <Product key={index} name={product.name} price={product.price} quantity={product.quantity} allQuantity={product.price * product.quantity} 
+        //                         deleteProduct={this.deleteProduct.bind(this, index)} />;
+        //         });
+
+        //         return (
+        //             <table>
+        //                 <tbody>
+        //                     <tr>
+        //                         <td>Наименование</td>
+        //                         <td>Цена</td>
+        //                         <td>Количество</td>
+        //                         <td>Общая стоимость</td>
+        //                     </tr>
+        //                     {products}
+        //                 </tbody>
+        //             </table>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 8. Модифицируйте предыдущую задачу так, чтобы появился еще и один отдельный компонент для добавления нового продукта в таблицу.
+
+        // class Product extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.price}</td>
+        //                 <td>{this.props.quantity}</td>
+        //                 <td>{this.props.allQuantity}</td>
+        //                 <td><button onClick={this.props.deleteProduct.bind(null)}>Удалить</button></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class AddProduct extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <input type="text" value={this.props.valueName} onChange={this.props.changeInputName.bind(null)} placeholder="Наименование" />
+        //                 <input type="text" value={this.props.valuePrice} onChange={this.props.changeInputPrice.bind(null)} placeholder="Цена" />
+        //                 <input type="text" value={this.props.valueQuantity} onChange={this.props.changeInputQuantity.bind(null)} placeholder="Количество" />
+        //                 <button onClick={this.props.addProduct.bind(null)}>Добавить товар</button>
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             products: [
+        //                 {name: 'Телефон', price: 10000, quantity: 1},
+        //                 {name: 'Машина', price: 1000000, quantity: 1},
+        //                 {name: 'Наушники', price: 1000, quantity: 8},
+        //                 {name: 'Компьютер', price: 90000, quantity: 8},
+        //                 {name: 'Мышка', price: 3500, quantity: 8},
+        //                 {name: 'Клавиатура', price: 2200, quantity: 8},
+        //             ], valueName: '', valuePrice: '', valueQuantity: ''
+        //         };
+        //     };
+
+        //     deleteProduct(index){
+        //         this.state.products.splice(index, 1);
+        //         this.setState({products: this.state.products});
+        //     };
+
+        //     changeInputName(event){
+        //         this.setState({valueName: event.target.value});
+        //     };
+
+        //     changeInputPrice(event){
+        //         this.setState({valuePrice: event.target.value});
+        //     };
+
+        //     changeInputQuantity(event){
+        //         this.setState({valueQuantity: event.target.value});
+        //     };
+
+        //     addProduct(){
+        //         this.state.products.push({name: this.state.valueName, price: this.state.valuePrice, quantity: this.state.valueQuantity});
+        //         this.setState({products: this.state.products});
+        //     };
+
+        //     render(){
+        //         const products = this.state.products.map((product, index) => {
+        //             return <Product key={index} name={product.name} price={product.price} quantity={product.quantity} allQuantity={product.price * product.quantity} 
+        //                         deleteProduct={this.deleteProduct.bind(this, index)} />;
+        //         });
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         <tr>
+        //                             <td>Наименование</td>
+        //                             <td>Цена</td>
+        //                             <td>Количество</td>
+        //                             <td>Общая стоимость</td>
+        //                         </tr>
+        //                         {products}
+        //                     </tbody>
+        //                 </table>
+        //                 <AddProduct valueName={this.state.valueName} valuePrice={this.state.valuePrice} valueQuantity={this.state.valueQuantity} 
+        //                             changeInputName={this.changeInputName.bind(this)} changeInputPrice={this.changeInputPrice.bind(this)} changeInputQuantity={this.changeInputQuantity.bind(this)}
+        //                             addProduct={this.addProduct.bind(this)} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // // 9. Модифицируйте предыдущую задачу так, чтобы под таблицей появился еще и один отдельный компонент, в котором будет выведена полная стоимость всех продуктов.
+
+        // class Product extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td>{this.props.name}</td>
+        //                 <td>{this.props.price}</td>
+        //                 <td>{this.props.quantity}</td>
+        //                 <td>{this.props.allQuantity}</td>
+        //                 <td><button onClick={this.props.deleteProduct.bind(null)}>Удалить</button></td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class AddProduct extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <div>
+        //                 <input type="text" value={this.props.valueName} onChange={this.props.changeInputName.bind(null)} placeholder="Наименование" />
+        //                 <input type="text" value={this.props.valuePrice} onChange={this.props.changeInputPrice.bind(null)} placeholder="Цена" />
+        //                 <input type="text" value={this.props.valueQuantity} onChange={this.props.changeInputQuantity.bind(null)} placeholder="Количество" />
+        //                 <button onClick={this.props.addProduct.bind(null)}>Добавить товар</button>
+        //             </div>
+        //         );
+        //     };
+        // };
+
+        // class Result extends React.Component{
+        //     constructor(){
+        //         super();
+        //     };
+
+        //     render(){
+        //         return (
+        //             <tr>
+        //                 <td></td>
+        //                 <td></td>
+        //                 <td style={{fontWeight: 900}}>Итого:</td>
+        //                 <td style={{fontWeight: 900}}>{this.props.result}</td>
+        //             </tr>
+        //         );
+        //     };
+        // };
+
+        // class App extends React.Component{
+        //     constructor(){
+        //         super();
+        //         this.state = {
+        //             products: [
+        //                 {name: 'Телефон', price: 10000, quantity: 1},
+        //                 {name: 'Машина', price: 1000000, quantity: 1},
+        //                 {name: 'Наушники', price: 1000, quantity: 8},
+        //                 {name: 'Компьютер', price: 90000, quantity: 8},
+        //                 {name: 'Мышка', price: 3500, quantity: 8},
+        //                 {name: 'Клавиатура', price: 2200, quantity: 8},
+        //             ], valueName: '', valuePrice: '', valueQuantity: ''
+        //         };
+        //     };
+
+        //     deleteProduct(index){
+        //         this.state.products.splice(index, 1);
+        //         this.setState({products: this.state.products});
+        //     };
+
+        //     changeInputName(event){
+        //         this.setState({valueName: event.target.value});
+        //     };
+
+        //     changeInputPrice(event){
+        //         this.setState({valuePrice: event.target.value});
+        //     };
+
+        //     changeInputQuantity(event){
+        //         this.setState({valueQuantity: event.target.value});
+        //     };
+
+        //     addProduct(){
+        //         this.state.products.push({name: this.state.valueName, price: this.state.valuePrice, quantity: this.state.valueQuantity});
+        //         this.setState({products: this.state.products});
+        //     };
+
+        //     getAllQuality(){
+        //         let result = [];
+        //         let allSum = 0;
+
+        //         for(let i = 0; i < this.state.products.length; i++){
+        //             result.push(Number(this.state.products[i].price * this.state.products[i].quantity));
+        //         }
+
+        //         for(let i = 0; i < result.length; i++){
+        //             allSum += result[i];
+        //         }
+                
+        //         return allSum;
+        //     };
+
+        //     render(){
+        //         const products  = this.state.products.map((product, index) => {
+        //             return <Product key={index} name={product.name} price={product.price} quantity={product.quantity} allQuantity={product.price * product.quantity}
+        //                         deleteProduct={this.deleteProduct.bind(this, index)} />;
+        //         });
+
+        //         const allSum    = this.getAllQuality();
+
+        //         return (
+        //             <div>
+        //                 <table>
+        //                     <tbody>
+        //                         <tr>
+        //                             <td>Наименование</td>
+        //                             <td>Цена</td>
+        //                             <td>Количество</td>
+        //                             <td>Общая стоимость</td>
+        //                         </tr>
+        //                         {products}
+        //                         <Result result={allSum} />
+        //                     </tbody>
+        //                 </table>
+        //                 <AddProduct valueName={this.state.valueName} valuePrice={this.state.valuePrice} valueQuantity={this.state.valueQuantity} 
+        //                             changeInputName={this.changeInputName.bind(this)} changeInputPrice={this.changeInputPrice.bind(this)} changeInputQuantity={this.changeInputQuantity.bind(this)}
+        //                             addProduct={this.addProduct.bind(this)} />
+        //             </div>
+        //         );
+        //     };
+        // };
+        // ReactDOM.render(<App/>, document.getElementById('content'));
+
+
+
+
+        // 10. Модифицируйте предыдущую задачу так, чтобы в таблице появилась еще одна колонка, в которой будут находиться чекбоксы. Изначально эти чекбоксы отмечены. 
+        // Сделайте так, чтобы полная стоимость всех продуктов выводилась только для тех продуктов, у которых чекбокс отмечен.
+
+        class Product extends React.Component{
+            constructor(){
+                super();
+            };
+
+            render(){
+                return (
+                    <tr>
+                        <td>{this.props.name}</td>
+                        <td>{this.props.price}</td>
+                        <td>{this.props.quantity}</td>
+                        <td>{this.props.allQuantity}</td>
+                        <td><input type="checkbox" value={this.props.value} checked={this.props.checked} onChange={this.props.changeCheckbox.bind(null)} /></td>
+                        <td><button onClick={this.props.deleteProduct.bind(null)}>Удалить</button></td>
+                    </tr>
+                );
+            };
+        };
+
+        class AddProduct extends React.Component{
+            constructor(){
+                super();
+            };
+
+            render(){
+                return (
+                    <div>
+                        <input type="text" value={this.props.valueName} onChange={this.props.changeInputName.bind(null)} placeholder="Наименование" />
+                        <input type="text" value={this.props.valuePrice} onChange={this.props.changeInputPrice.bind(null)} placeholder="Цена" />
+                        <input type="text" value={this.props.valueQuantity} onChange={this.props.changeInputQuantity} placeholder="Количество" />
+                        <button onClick={this.props.addProduct.bind(null)}>Добавить товар</button>
+                    </div>
+                );
+            };
+        };
+
+        class Result extends React.Component{
+            constructor(){
+                super();
+            };
+
+            render(){
+                return (
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style={{fontWeight: 900}}>Итого:</td>
+                        <td style={{fontWeight: 900}}>{this.props.result}</td>
+                    </tr>
+                );
+            };
+        };
+
+        class App extends React.Component{
+            constructor(){
+                super();
+                this.state = {
+                    products: [
+                        {name: 'Телефон', price: 10000, quantity: 1, correct: '-', check: true},
+                        {name: 'Машина', price: 1000000, quantity: 1, correct: '-', check: true},
+                        {name: 'Наушники', price: 1000, quantity: 8, correct: '-', check: true},
+                        {name: 'Компьютер', price: 90000, quantity: 8, correct: '-', check: true},
+                        {name: 'Мышка', price: 3500, quantity: 8, correct: '-', check: true},
+                        {name: 'Клавиатура', price: 2200, quantity: 8, correct: '-', check: true},
+                    ], valueName: '', valuePrice: '', valueQuantity: ''
+                };
+            };
+
+            deleteProduct(index){
+                this.state.products.splice(index, 1);
+                this.setState({products: this.state.products});
+            };
+
+            changeInputName(event){
+                this.setState({valueName: event.target.value});
+            };
+
+            changeInputPrice(event){
+                this.setState({valuePrice: event.target.value});
+            };
+
+            changeInputQuantity(event){
+                this.setState({valueQuantity: event.target.value});
+            };
+
+            addProduct(){
+                this.state.products.push({name: this.state.valueName, price: this.state.valuePrice, quantity: this.state.valueQuantity, check: true});
+                this.setState({products: this.state.products});
+            };
+
+            getAllQuality(){
+                let result = [];
+                let allSum = 0;
+
+                for(let i = 0; i < this.state.products.length; i++){
+                    if(this.state.products[i].check){
+                        result.push(Number(this.state.products[i].price * this.state.products[i].quantity));
+                    }
+                }
+
+                for(let i = 0; i < result.length; i++){
+                    allSum += result[i];
+                }
+                
+                return allSum;
+            };
+
+            changeCheckbox(event){
+                let index           = event.target.value;
+                this.state.products[index].check = !this.state.products[index].check;
+                this.setState({products: this.state.products});
+            };
+
+            render(){
+                const products  = this.state.products.map((product, index) => {
+                    return <Product key={index} name={product.name} price={product.price} quantity={product.quantity} allQuantity={product.check ? (product.price * product.quantity) : '-'}
+                            checked={product.check} value={index} deleteProduct={this.deleteProduct.bind(this, index)} changeCheckbox={this.changeCheckbox.bind(this)} />;
+                });
+
+                const allSum    = this.getAllQuality();
+
+                return (
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Наименование</td>
+                                    <td>Цена</td>
+                                    <td>Количество</td>
+                                    <td>Общая стоимость</td>
+                                </tr>
+                                {products}
+                                <Result result={allSum} />
+                            </tbody>
+                        </table>
+                        <AddProduct valueName={this.state.valueName} valuePrice={this.state.valuePrice} valueQuantity={this.state.valueQuantity} 
+                                    changeInputName={this.changeInputName.bind(this)} changeInputPrice={this.changeInputPrice.bind(this)} changeInputQuantity={this.changeInputQuantity.bind(this)}
+                                    addProduct={this.addProduct.bind(this)} />
+                    </div>
+                );
+            };
+        };
+        ReactDOM.render(<App/>, document.getElementById('content'));
+    </script>
+</body>
+</html>
