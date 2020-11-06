@@ -1,0 +1,23 @@
+.App{
+    text-align: center;
+}
+
+.App h1{
+    color: rgb(177, 236, 16);
+    font-size: 50px;
+}
+
+.appButton{
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:focus, &:active{
+        outline: none;
+    }
+
+    &:hover{
+        background: rgb(8, 238, 180);
+    }
+}
