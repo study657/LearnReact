@@ -6,7 +6,7 @@ import Car from './Car/Car.js';
 import ErrorBoundary from './ErrorBoudary/ErrorBoundary.js';
 import Counter from './Counter/Counter.js';
 
-class App extends Component{
+class App extends Component{ 
   constructor(){
     super();
     this.state = {cars: [
