@@ -66,7 +66,7 @@ class App extends Component{
   };
 };
 
-Car.propTypes = {
+Car.propTypes = { // Здесь идет объект на то что мы хотим проверять
   name: propTypes.string,
   year: propTypes.number,
   changeName: propTypes.func,
