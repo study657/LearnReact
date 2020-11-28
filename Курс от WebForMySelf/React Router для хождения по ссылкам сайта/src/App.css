@@ -1,0 +1,12 @@
+.App{
+  text-align: center;
+}
+
+.App nav a{
+  padding: 10px;
+}
+
+a.active{
+  color: red;
+  font-weight: bold;
+}

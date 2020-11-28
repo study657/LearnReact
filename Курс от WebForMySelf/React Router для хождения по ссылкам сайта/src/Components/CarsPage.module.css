@@ -1,0 +1,19 @@
+.Gen{
+    text-align: center;
+}
+
+.Gen div{
+    border: 2px solid black;
+}
+
+.Gen h1{
+    color: red;
+}
+
+.Gen h2{
+    color:  blue;
+}
+
+.Gen p{
+    color:  darkcyan;
+}
