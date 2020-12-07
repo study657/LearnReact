@@ -5,6 +5,7 @@ import {createControl, validate, validateForm} from '../../form/formFramwork.js'
 import Input from '../../components/Ui/Input/Input.js';
 import Auxililary from '../../hoc/Layout/Auxililary/Auxililary.js';
 import Select from '../../components/Ui/Select/Select.js';
+import axios from '../../axios/axios-quiz.js';
 
 function createOptionControl(number){
     return createControl({
@@ -69,8 +70,26 @@ class QuizCreator extends Component{
         });
     };
 
-    createQuizHandler = (event) => {
+    createQuizHandler = async (event) => {
         event.preventDefault();
+
+        try{
+            await axios.post('/quizes.json', this.state.quiz)
+            
+            this.setState({
+                quiz: [],
+                isFormValid: false,
+                rigthAnsweId: 1,
+                formControls: createFormControls()
+            });
+        } catch(e){
+            console.log(e);
+        }
+
+        // Это уже старый метор, применяется уже более новый, он выше с асинк
+        // axios.post('https://react-quiz-b7c90-default-rtdb.firebaseio.com/quizes.json', this.state.quiz).then(response => {
+        //     console.log(response);
+        // }).catch(error => console.log(error));
         
         // TODO: SERVER
     };
