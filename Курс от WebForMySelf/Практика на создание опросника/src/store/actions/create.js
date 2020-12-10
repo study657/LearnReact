@@ -1,4 +1,3 @@
-import simplify from "semver/ranges/simplify";
 import axios from "../../axios/axios-quiz.js";
 import { CREATE_QUIZ_QUESTION, RESET_QUIZ_CREATION } from "./actionTypes";
 
